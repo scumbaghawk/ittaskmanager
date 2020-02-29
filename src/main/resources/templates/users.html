@@ -6,7 +6,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
-    <title>IT Task Manager</title>
+    <title>Users</title>
 </head>
 <body>
 
@@ -47,59 +47,41 @@
     </nav>
 </div>
 
-
-<div class="jumbotron jumbotron-fluid">
-    <div class="container">
-        <h1 class="display-4">IT Task Manager</h1>
-        <p class="lead">Your tool of choice to manage IT teams</p>
-    </div>
-</div>
+<!--  -->
 
 <div class="container">
-    <div class="row">
-        <div class="col-sm">
-            <div class="card" style="width: 13rem;">
-                <img width="100%" height="100%" src="http://simpleicon.com/wp-content/uploads/meeting.png" alt="">
-                <div class="card-body">
-                    <p class="card-text">Manage tasks</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm">
-            <div class="card" style="width: 13rem;">
-                <img width="100%" height="100%" src="http://simpleicon.com/wp-content/uploads/monitor_1.png" alt="">
-                <div class="card-body">
-                    <p class="card-text">Monitor progress</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm">
-            <div class="card" style="width: 13rem;">
-                <img width="100%" height="100%" src="https://simpleicon.com/wp-content/uploads/laptop-2.png" alt="">
-                <div class="card-body">
-                    <p class="card-text">Coordinate projects</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm">
-            <div class="card" style="width: 13rem;">
-                <img width="100%" height="100%" src="https://simpleicon.com/wp-content/uploads/talk_1.png" alt="">
-                <div class="card-body">
-                    <p class="card-text">Boost your team performance</p>
-                </div>
-            </div>
-        </div>
-    </div>
+    <table class="table table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">User ID</th>
+            <th scope="col">Username</th>
+            <th scope="col">Password</th>
+            <th scope="col">Role</th>
+            <th scope="col">Experience</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user: ${users}">
+            <th scope="row" th:text="${user.getUser_id()}"></th>
+            <td th:text="${user.getUsername()}"></td>
+            <td th:text="${user.getPassword()}"></td>
+            <td th:text="${user.getRole()}"></td>
+            <td th:text="${user.getExperience()}"></td>
+        </tr>
+        </tbody>
+    </table>
 </div>
+
+<!--  -->
 
 <footer class="page-footer font-small blue">
     <div class="footer-copyright text-center py-3">© 2020 Copyright:
-        <a href="">dominikzurawski.com</a>
+        <a href=""> dominikzurawski.com</a>
     </div>
 </footer>
 
+</body>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-</body>
 </html>

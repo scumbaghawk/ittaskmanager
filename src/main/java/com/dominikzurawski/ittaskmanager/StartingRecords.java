@@ -28,28 +28,28 @@ public class StartingRecords {
         Task task1 = new Task();
         task1.setTask_id(1);
         task1.setName("Zrobic cos");
-        task1.setShortDesc("Wejdz tu i tu i zrob tamto");
+        task1.setShort_desc("Wejdz tu albo tam");
         task1.setDesc("To bardzo dlugi opis jakiegos skomplikowanego zadania");
         task1.setCompleted(false);
 
         Task task2 = new Task();
         task2.setTask_id(2);
-        task2.setName("Zrobic cos");
-        task2.setShortDesc("Wejdz tu i tu i zrob tamto");
+        task2.setName("Zrobic cos 2");
+        task2.setShort_desc("asdafdfsd");
         task2.setDesc("To bardzo dlugi opis jakiegos skomplikowanego zadania");
         task2.setCompleted(false);
 
         Task task3 = new Task();
         task3.setTask_id(3);
-        task3.setName("Zrobic cos");
-        task3.setShortDesc("Wejdz tu i tu i zrob tamto");
+        task3.setName("Zrobic cos 3");
+        task3.setShort_desc("Wejdz tu i tu i zrob tamto");
         task3.setDesc("To bardzo dlugi opis jakiegos skomplikowanego zadania");
-        task3.setCompleted(false);
+        task3.setCompleted(true);
 
         Task task4 = new Task();
         task4.setTask_id(4);
-        task4.setName("Zrobic cos");
-        task4.setShortDesc("Wejdz tu i tu i zrob tamto");
+        task4.setName("Zrobic cos 4");
+        task4.setShort_desc("Wejdz tu i tu i zrob tamto");
         task4.setDesc("To bardzo dlugi opis jakiegos skomplikowanego zadania");
         task4.setCompleted(false);
 

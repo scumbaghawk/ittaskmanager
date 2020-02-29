@@ -1,0 +1,38 @@
+.jumbotron {
+    text-align: left;
+}
+
+.display-4 {
+    color: cornflowerblue;
+}
+
+.container .cards {
+    justify-content: center;
+}
+
+a .logo {
+    float: left;
+}
+
+.page-footer {
+    background-color: #e9ecef;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
+.card {
+    border: none;
+}
+
+.card-text {
+    font-size: larger;
+    text-align: center;
+}
+
+.login-register-form {
+    margin-top: 50px;
+    max-width: 30%;
+}

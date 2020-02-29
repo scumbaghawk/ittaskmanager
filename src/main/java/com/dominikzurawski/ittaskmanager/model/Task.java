@@ -1,8 +1,6 @@
 package com.dominikzurawski.ittaskmanager.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
 public class Task {
@@ -11,9 +9,9 @@ public class Task {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long task_id;
     private String name;
-    private String shortDesc;
+    private String short_desc;
     private String desc;
-    private boolean isCompleted;
+    private boolean completed; // automatyczny getter ustawia sie na isCompleted ale do H2 Hibernate musi byc getCompleted
 
     public long getTask_id() {
         return task_id;
@@ -31,12 +29,12 @@ public class Task {
         this.name = name;
     }
 
-    public String getShortDesc() {
-        return shortDesc;
+    public String getShort_desc() {
+        return short_desc;
     }
 
-    public void setShortDesc(String shortDesc) {
-        this.shortDesc = shortDesc;
+    public void setShort_desc(String short_desc) {
+        this.short_desc = short_desc;
     }
 
     public String getDesc() {
@@ -47,11 +45,11 @@ public class Task {
         this.desc = desc;
     }
 
-    public boolean isCompleted() {
-        return isCompleted;
+    public boolean getCompleted() {
+        return completed;
     }
 
     public void setCompleted(boolean completed) {
-        isCompleted = completed;
+        this.completed = completed;
     }
 }

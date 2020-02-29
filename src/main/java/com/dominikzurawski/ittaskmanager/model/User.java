@@ -13,7 +13,9 @@ public class User {
     private long user_id;
     private String username;
     private String password;
+    @Enumerated(EnumType.STRING)
     private Role role;
+    @Enumerated(EnumType.STRING)
     private Experience experience;
 
     @OneToMany
@@ -32,36 +34,36 @@ public class User {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getPassword() {
         return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public Role getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
     public Experience getExperience() {
         return experience;
     }
 
-    public void setExperience(Experience experience) {
-        this.experience = experience;
-    }
-
     public Set<Task> getTasks() {
         return tasks;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public void setExperience(Experience experience) {
+        this.experience = experience;
     }
 
     public void setTasks(Set<Task> tasks) {
