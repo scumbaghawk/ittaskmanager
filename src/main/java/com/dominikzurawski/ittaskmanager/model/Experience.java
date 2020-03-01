@@ -1,5 +1,7 @@
 package com.dominikzurawski.ittaskmanager.model;
 
 public enum Experience {
-    JUNIOR, MID, SENIOR
+    JUNIOR,
+    MID,
+    SENIOR
 }

@@ -51,42 +51,41 @@
 <!--  -->
 
 <div class="container login-register-form">
-    <form>
+    <form th:action="@{/register}" th:object="${user}" method="post">
 
         <div class="form-group">
-            <label for="email">Email address</label>
-            <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
-                   placeholder="example@mail.com">
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-                else.</small>
+            <label for="username">Username</label>
+            <input type="username" th:name="username" th:value="*{username}" class="form-control" id="username" placeholder="username">
         </div>
 
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="password">
+            <input type="password" th:name="password" th:value="*{password}" class="form-control" id="password" placeholder="password">
         </div>
 
-        <div class="form-group">
-            <label for="confirmPassword">Confirm password</label>
-            <input type="password" class="form-control" id="confirmPassword" placeholder="password">
-        </div>
+
+<!--        <div class="form-group">-->
+<!--            <label for="confirmPassword">Confirm password</label>-->
+<!--            <input type="password" class="form-control" id="confirmPassword" placeholder="password">-->
+<!--        </div>-->
+
 
         <div class="form-group">
             <label for="role">Are you manager or employee?</label>
-            <select class="form-control" id="role">
-                <option value=""></option>
-                <option>Manager</option>
-                <option>Employee</option>
+            <select class="form-control" id="role" th:name="role" th:value="*{role}">
+                <option></option>
+                <option value="MANAGER">Manager</option>
+                <option value="EMPLOYEE">Employee</option>
             </select>
         </div>
 
         <div class="form-group">
             <label for="experience">What is your experience?</label>
-            <select class="form-control" id="experience">
-                <option value=""></option>
-                <option>Junior</option>
-                <option>Mid</option>
-                <option>Senior</option>
+            <select class="form-control" id="experience" th:name="experience" th:value="*{experience}">
+                <option></option>
+                <option value="JUNIOR">Junior</option>
+                <option value="MID">Mid</option>
+                <option value="SENIOR">Senior</option>
             </select>
         </div>
 

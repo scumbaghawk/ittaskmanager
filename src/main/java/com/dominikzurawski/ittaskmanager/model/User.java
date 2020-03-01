@@ -9,12 +9,17 @@ import java.util.Set;
 public class User {
 
     @Id
+    @NotNull
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long user_id;
+    @NotNull
     private String username;
+    @NotNull
     private String password;
+    @NotNull
     @Enumerated(EnumType.STRING)
     private Role role;
+    @NotNull
     @Enumerated(EnumType.STRING)
     private Experience experience;
 
@@ -69,4 +74,6 @@ public class User {
     public void setTasks(Set<Task> tasks) {
         this.tasks = tasks;
     }
+
+
 }

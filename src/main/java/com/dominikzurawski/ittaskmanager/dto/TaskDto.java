@@ -9,5 +9,4 @@ public interface TaskDto {
     String getDesc();
     boolean getCompleted();
 
-
 }
