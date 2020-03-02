@@ -62,7 +62,7 @@
         </thead>
         <tbody>
         <tr th:each="user: ${users}">
-            <th scope="row" th:text="${user.getUser_id()}"></th>
+            <th scope="row" th:text="${user.getId()}"></th>
             <td th:text="${user.getUsername()}"></td>
 <!--            <td th:text="${user.getPassword()}"></td>-->
             <td th:text="${user.getRole()}"></td>

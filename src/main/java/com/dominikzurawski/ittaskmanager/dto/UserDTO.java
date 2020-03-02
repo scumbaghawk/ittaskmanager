@@ -6,9 +6,9 @@ import com.dominikzurawski.ittaskmanager.model.Task;
 
 import java.util.Set;
 
-public interface UserDto {
+public interface UserDTO {
 
-    public long getUser_id();
+    public long getId();
     public String getUsername();
     public String getPassword();
     public Role getRole();

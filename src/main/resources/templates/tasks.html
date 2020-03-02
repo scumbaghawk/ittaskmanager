@@ -62,9 +62,9 @@
         </thead>
         <tbody>
         <tr th:each="task: ${tasks}">
-            <th scope="row" th:text="${task.getTask_id()}"></th>
+            <th scope="row" th:text="${task.getId()}"></th>
             <td th:text="${task.getName()}"></td>
-            <td th:text="${task.getShort_desc()}"></td>
+            <td th:text="${task.getShortDesc()}"></td>
             <td th:text="${task.getDesc()}"></td>
             <td th:text="${task.getCompleted()}"></td>
         </tr>

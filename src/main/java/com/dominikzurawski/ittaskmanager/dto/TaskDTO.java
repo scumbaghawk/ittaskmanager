@@ -1,9 +1,9 @@
 package com.dominikzurawski.ittaskmanager.dto;
 
-public interface TaskDto {
+public interface TaskDTO {
 
     // gettery musza byc takie same jak w klasie Task
-    long getTask_id();
+    long getId();
     String getName();
     String getShort_desc();
     String getDesc();

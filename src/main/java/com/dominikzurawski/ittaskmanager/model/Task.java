@@ -6,19 +6,27 @@ import javax.persistence.*;
 public class Task {
 
     @Id
+    @Column(name = "task_id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private long task_id;
+    private long id;
+
     private String name;
-    private String short_desc;
+
+    @Column(name = "short_desc")
+    private String shortDesc;
+
     private String desc;
+
     private boolean completed; // automatyczny getter ustawia sie na isCompleted ale do H2 Hibernate musi byc getCompleted
 
-    public long getTask_id() {
-        return task_id;
+    //    getters and setters...
+
+    public long getId() {
+        return id;
     }
 
-    public void setTask_id(long task_id) {
-        this.task_id = task_id;
+    public void setId(long task_id) {
+        this.id = task_id;
     }
 
     public String getName() {
@@ -29,12 +37,12 @@ public class Task {
         this.name = name;
     }
 
-    public String getShort_desc() {
-        return short_desc;
+    public String getShortDesc() {
+        return shortDesc;
     }
 
-    public void setShort_desc(String short_desc) {
-        this.short_desc = short_desc;
+    public void setShortDesc(String short_desc) {
+        this.shortDesc = short_desc;
     }
 
     public String getDesc() {

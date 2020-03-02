@@ -2,7 +2,6 @@ package com.dominikzurawski.ittaskmanager.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
@@ -10,15 +9,20 @@ public class User {
 
     @Id
     @NotNull
+    @Column(name = "user_id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private long user_id;
+    private long id;
+
     @NotNull
     private String username;
+
     @NotNull
     private String password;
+
     @NotNull
     @Enumerated(EnumType.STRING)
     private Role role;
+
     @NotNull
     @Enumerated(EnumType.STRING)
     private Experience experience;
@@ -27,12 +31,14 @@ public class User {
     @JoinColumn(name = "user_id")
     private Set<Task> tasks;
 
-    public long getUser_id() {
-        return user_id;
+//    getters and setters...
+
+    public long getId() {
+        return id;
     }
 
-    public void setUser_id(long user_id) {
-        this.user_id = user_id;
+    public void setId(long userId) {
+        this.id = userId;
     }
 
     public String getUsername() {
@@ -74,6 +80,5 @@ public class User {
     public void setTasks(Set<Task> tasks) {
         this.tasks = tasks;
     }
-
 
 }
