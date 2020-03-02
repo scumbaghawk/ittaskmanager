@@ -1,4 +1,4 @@
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -43,6 +43,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/users">Users</a>
                 </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -63,7 +66,7 @@
 
         <div class="form-group">
             <label for="username">Username</label>
-            <input type="username" class="form-control" id="username">
+            <input type="text" class="form-control" id="username">
         </div>
 
         <div class="form-group">
