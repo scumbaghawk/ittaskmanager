@@ -30,8 +30,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/about").hasAuthority("ADMIN")
                 .antMatchers("*").permitAll()
                 .and()
-            .formLogin().permitAll();
-//                .loginPage("/login");
+            .formLogin()
+                .loginPage("/login")
+                .permitAll()
+                .and()
+            .logout()
+                .logoutSuccessUrl("/?logout");
     }
 
     // provides logging authentication with bcrypt
