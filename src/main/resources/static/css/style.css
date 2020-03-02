@@ -40,3 +40,7 @@ a .logo {
 .register-validation {
     margin-bottom: 25px;
 }
+
+.logout-message {
+    margin-top: 20px;
+}
