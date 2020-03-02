@@ -2,6 +2,8 @@ package com.dominikzurawski.ittaskmanager.auth;
 
 import com.dominikzurawski.ittaskmanager.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -32,27 +34,24 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                .loginPage("/login").permitAll();
     }
 
+    // provides logging authentication with bcrypt
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(customUserDetailsService).passwordEncoder(new BCryptPasswordEncoder());
-        auth.userDetailsService(customUserDetailsService).passwordEncoder(getPasswordEncoder());
+        auth.authenticationProvider(authProvider());
     }
 
-    private PasswordEncoder getPasswordEncoder() {
-//        return new PasswordEncoder() {
-//            @Override
-//            public String encode(CharSequence charSequence) {
-//                return charSequence.toString();
-//            }
-//
-//            @Override
-//            public boolean matches(CharSequence charSequence, String s) {
-//                return true;
-//            }
-//        };
+    // provides bcryption encryption
+    @Bean
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-
+    @Bean
+    public DaoAuthenticationProvider authProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(customUserDetailsService);
+        authProvider.setPasswordEncoder(passwordEncoder());
+        return authProvider;
+    }
 
 }
