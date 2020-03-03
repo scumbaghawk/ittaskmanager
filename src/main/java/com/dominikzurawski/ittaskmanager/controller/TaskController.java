@@ -40,6 +40,7 @@ public class TaskController {
     @GetMapping("/mytasks")
     public String getMyTasks(Model model){
 
+        // lines below are to identify currently logged user
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         String username;
@@ -49,8 +50,8 @@ public class TaskController {
         } else {
             username = principal.toString();
         }
+        // lines above are to identify currently logged user
 
-        System.out.println(username);
 
         List<Task> myTasks = userRepository.findByUsername(username).getTasks();
         model.addAttribute("myTasks", myTasks);

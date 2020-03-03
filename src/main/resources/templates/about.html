@@ -41,7 +41,7 @@
                     <a class="nav-link" href="/tasks" sec:authorize="hasAnyAuthority('ADMIN', 'MANAGER')">All tasks</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" sec:authorize="isAuthenticated()">My tasks</a>
+                    <a class="nav-link" href="/mytasks" sec:authorize="isAuthenticated()">My tasks</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/newtask" sec:authorize="hasAnyAuthority('ADMIN', 'MANAGER')">New task</a>
