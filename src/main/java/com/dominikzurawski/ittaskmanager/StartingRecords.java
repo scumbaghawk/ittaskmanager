@@ -54,14 +54,14 @@ public class StartingRecords {
         employee.setPassword("$2a$10$.xxq7E6VTLDAclIArzvQhe8VqrutoRfTFQl2gYVhkB8LiN3nKuG8."); // password is "haslo"
         employee.setRole(Role.EMPLOYEE);
         employee.setExperience(Experience.JUNIOR);
-        employee.setTasks(Stream.of(task1, task2, task3).collect(Collectors.toSet()));
+        employee.setTasks(Stream.of(task1, task2, task3).collect(Collectors.toList()));
 
         User manager = new User();
         manager.setUsername("Tom");
         manager.setPassword("$2a$10$.xxq7E6VTLDAclIArzvQhe8VqrutoRfTFQl2gYVhkB8LiN3nKuG8."); // password is "haslo"
         manager.setRole(Role.MANAGER);
         manager.setExperience(Experience.MID);
-        manager.setTasks(Stream.of(task4).collect(Collectors.toSet()));
+        manager.setTasks(Stream.of(task4).collect(Collectors.toList()));
 
         User admin = new User();
         admin.setUsername("admin");

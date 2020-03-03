@@ -2,6 +2,7 @@ package com.dominikzurawski.ittaskmanager.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -27,9 +28,9 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Experience experience;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    private Set<Task> tasks;
+    private List<Task> tasks;
 
 //    getters and setters...
 
@@ -57,7 +58,7 @@ public class User {
         return experience;
     }
 
-    public Set<Task> getTasks() {
+    public List<Task> getTasks() {
         return tasks;
     }
 
@@ -77,7 +78,7 @@ public class User {
         this.experience = experience;
     }
 
-    public void setTasks(Set<Task> tasks) {
+    public void setTasks(List<Task> tasks) {
         this.tasks = tasks;
     }
 

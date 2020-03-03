@@ -1,14 +1,21 @@
 package com.dominikzurawski.ittaskmanager.controller;
 
 import com.dominikzurawski.ittaskmanager.model.Task;
+import com.dominikzurawski.ittaskmanager.model.User;
 import com.dominikzurawski.ittaskmanager.repository.TaskRepository;
+import com.dominikzurawski.ittaskmanager.repository.UserRepository;
+import com.dominikzurawski.ittaskmanager.service.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -16,6 +23,9 @@ public class TaskController {
 
     @Autowired
     TaskRepository taskRepository;
+
+    @Autowired
+    UserRepository userRepository;
 
     @GetMapping("/tasks")
     public String getAllTasks(Model model){
@@ -25,6 +35,27 @@ public class TaskController {
         model.addAttribute("tasks", tasks);
 
         return "tasks";
+    }
+
+    @GetMapping("/mytasks")
+    public String getMyTasks(Model model){
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        String username;
+
+        if (principal instanceof CustomUserDetails) {
+            username = ((CustomUserDetails)principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+
+        System.out.println(username);
+
+        List<Task> myTasks = userRepository.findByUsername(username).getTasks();
+        model.addAttribute("myTasks", myTasks);
+
+        return "mytasks";
     }
 
     @GetMapping("/newtask")
