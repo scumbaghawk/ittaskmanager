@@ -1,0 +1,106 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <title>Add new task</title>
+</head>
+
+<body>
+
+<div class="container">
+
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+
+        <a class="navbar-brand">
+            <img width="40em" height="40rem" src="https://simpleicon.com/wp-content/uploads/embed-close.png" alt="">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar1">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbar1">
+            <ul class="navbar-nav justify-content-end">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/register">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/newtask">New task</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/tasks">Tasks</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users">Users</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+<!--  -->
+
+<div class="container login-register-form">
+
+    <div th:if="${nameEmpty}" th:text="${nameEmpty}" class="alert alert-danger register-validation"></div>
+    <div th:if="${shortDescEmpty}" th:text="${shortDescEmpty}" class="alert alert-danger register-validation"></div>
+    <div th:if="${descEmpty}" th:text="${descEmpty}" class="alert alert-danger register-validation"></div>
+
+    <form th:action="@{/newtask}" th:object="${task}" method="post">
+
+
+        <div class="form-group">
+            <label for="name">Task name</label>
+            <input type="text" th:name="name" th:value="*{name}" class="form-control" id="name" placeholder="Task name">
+        </div>
+
+        <div class="form-group">
+            <label for="shortdesc">Short description</label>
+            <input type="textarea" th:name="shortDesc" th:value="*{shortDesc}" class="form-control" id="shortdesc">
+        </div>
+
+        <div class="form-group">
+            <label for="desc">Description</label>
+            <input type="textarea" th:name="desc" th:value="*{desc}" class="form-control" id="desc">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+</div>
+
+<!--  -->
+
+<footer class="page-footer font-small blue">
+    <div class="footer-copyright text-center py-3">© 2020 Copyright:
+        <a href=""> dominikzurawski.com</a>
+    </div>
+</footer>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+</html>

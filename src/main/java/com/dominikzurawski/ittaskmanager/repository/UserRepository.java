@@ -9,8 +9,7 @@ import java.util.List;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    //wyciaga wszystko do obiektu w kontrolerze, potem mozna uzywac metod zadeklarowanych w UserDto do wyciągania poszczególnych wartości
     List<User> findAll();
-
     User findByUsername(String username);
+    User deleteById(long id);
 }
