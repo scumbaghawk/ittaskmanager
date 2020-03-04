@@ -1,7 +1,6 @@
 package com.dominikzurawski.ittaskmanager.controller;
 
 import com.dominikzurawski.ittaskmanager.model.User;
-import com.dominikzurawski.ittaskmanager.repository.TaskRepository;
 import com.dominikzurawski.ittaskmanager.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,17 +11,25 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+
+/**
+ * This class is responsible for:
+ * Registering new users including encryption
+ * displaying all users
+ **/
+
 @Controller
 public class RegisterController {
 
-    @Autowired
-    private TaskRepository taskRepository;
+
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    public RegisterController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
 
     @GetMapping("/register")

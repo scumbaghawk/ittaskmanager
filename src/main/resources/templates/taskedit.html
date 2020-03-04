@@ -6,8 +6,9 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
-    <title>IT Tasks</title>
+    <title>Edit task</title>
 </head>
+
 <body>
 
 <!--NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR-->
@@ -64,33 +65,33 @@
 <!--NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR-->
 <!--NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR-->
 
+<div class="container login-register-form">
 
-<div class="container">
-    <table class="table table-hover">
-        <thead class="thead-dark">
-        <tr>
-            <th scope="col">Task ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Short description</th>
-            <th scope="col">Description</th>
-            <th scope="col">Completed</th>
-            <th scope="col">Edit task</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="task: ${tasks}">
-            <th scope="row" th:text="${task.getId()}"></th>
-            <td th:text="${task.getName()}"></td>
-            <td th:text="${task.getShortDesc()}"></td>
-            <td th:text="${task.getDesc()}"></td>
-            <td th:text="${task.getCompleted()}"></td>
-            <td> <a th:href="@{'/task/edit/' + ${task.getId()}}"><button class="btn btn-success">Edit</button></a>
-                <hr>
-                <a th:href="@{'/task/delete/' + ${task.getId()}}"><button class="btn btn-danger">Delete</button></a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <div th:if="${nameEmpty}" th:text="${nameEmpty}" class="alert alert-danger register-validation"></div>
+    <div th:if="${shortDescEmpty}" th:text="${shortDescEmpty}" class="alert alert-danger register-validation"></div>
+    <div th:if="${descEmpty}" th:text="${descEmpty}" class="alert alert-danger register-validation"></div>
+
+    <form th:action="@{/task/edit/{id}(id = ${task.get().getId()})}" th:object="${task}" method="post">
+
+        <h2>Edit task of ID #<span th:text="*{get().getId()}"></span></h2>
+
+        <div class="form-group">
+            <label for="name">Task name</label>
+            <input type="text" th:name="name" class="form-control" id="name" th:value="*{get().getName()}">
+        </div>
+
+        <div class="form-group">
+            <label for="shortdesc">Short description</label>
+            <input type="textarea" th:name="shortDesc" class="form-control" id="shortdesc" th:value="*{get().getShortDesc()}">
+        </div>
+
+        <div class="form-group">
+            <label for="desc">Description</label>
+            <input type="textarea" th:name="desc" class="form-control" id="desc" th:value="*{get().getDesc()}">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Edit task</button>
+    </form>
 </div>
 
 <!--  -->
@@ -102,7 +103,14 @@
 </footer>
 
 </body>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
 </html>
