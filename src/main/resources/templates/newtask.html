@@ -70,12 +70,12 @@
 
 <div class="container login-register-form">
 
-    <div th:if="${nameEmpty}" th:text="${nameEmpty}" class="alert alert-danger register-validation"></div>
-    <div th:if="${shortDescEmpty}" th:text="${shortDescEmpty}" class="alert alert-danger register-validation"></div>
-    <div th:if="${descEmpty}" th:text="${descEmpty}" class="alert alert-danger register-validation"></div>
 
     <form th:action="@{/newtask}" th:object="${task}" method="post">
 
+        <div th:if="${nameEmpty}" th:text="${nameEmpty}" class="alert alert-danger register-validation"></div>
+        <div th:if="${shortDescEmpty}" th:text="${shortDescEmpty}" class="alert alert-danger register-validation"></div>
+        <div th:if="${descEmpty}" th:text="${descEmpty}" class="alert alert-danger register-validation"></div>
 
         <div class="form-group">
             <label for="name">Task name</label>
