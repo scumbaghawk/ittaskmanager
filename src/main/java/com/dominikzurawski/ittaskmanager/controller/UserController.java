@@ -80,8 +80,19 @@ public class UserController {
 
         Optional<User> userToDelete = userRepository.findById(id);
 
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        String username;
+
         if (userToDelete.isPresent()){
             User user = userToDelete.get();
+            if (principal instanceof CustomUserDetails) {
+                username = ((CustomUserDetails)principal).getUsername();
+                if (username == userToDelete.get().getUsername()){
+                    userRepository.delete(user);
+                    return "redirect:/logout";
+                }
+            }
             userRepository.delete(user);
         }
 
