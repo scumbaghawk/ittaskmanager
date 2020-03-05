@@ -80,7 +80,7 @@ public class UserController {
 
         userToDelete = null;
 
-        return "redirect:/users";
+        return "redirect:/";
     }
 
     @GetMapping("/myprofile")
@@ -110,10 +110,37 @@ public class UserController {
 
         int numberOfIncompletedTasks = numberOfTasks - numberOfCompletedTasks;
 
+        model.addAttribute("userId", myUser.getId());
         model.addAttribute("username", username);
         model.addAttribute("completedTasks", numberOfCompletedTasks);
         model.addAttribute("incompletedTasks", numberOfIncompletedTasks);
 
         return "myprofile";
     }
+
+    @GetMapping("/myprofile/changepassword/{id}")
+    public String getChangePassword(Model model, @PathVariable Long id){
+
+        Optional<User> userToEdit = userRepository.findById(id);
+
+        if (userToEdit.isPresent()){
+            model.addAttribute("user", userToEdit);
+            return "changepassword";
+        }
+
+        return "redirect:/myprofile";
+    }
+
+//    @PostMapping("/myprofile/changepassword/{id}")
+//    public String setChangePassword(@ModelAttribute(value = "user") User user, Model model, @PathVariable Long id){
+//
+//        Optional<User> userToChangePassword = userRepository.findById(id);
+//
+//        String newPa
+//        if (userToChangePassword.isPresent()){
+//            userRepository.save(user);
+//        }
+//
+//        return "redirect:/myprofile";
+//    }
 }
