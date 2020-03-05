@@ -142,6 +142,8 @@ public class TaskController {
             taskRepository.delete(task);
         }
 
+        taskToDelete = null;
+
         return "redirect:/tasks";
     }
 

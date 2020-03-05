@@ -76,6 +76,8 @@ public class UserController {
             userRepository.delete(user);
         }
 
+        userToDelete = null;
+
         return "redirect:/users";
     }
 }
