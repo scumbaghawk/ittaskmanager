@@ -147,4 +147,33 @@ public class TaskController {
         return "redirect:/tasks";
     }
 
+    @GetMapping("/task/toggle/{id}")
+    public String toggleTaskCompleted(@PathVariable Long id){
+
+        Optional<Task> taskToToggle = taskRepository.findById(id);
+
+        if (taskToToggle.isPresent()){
+
+            Task task = taskToToggle.get();
+
+            System.out.println("BEFORE TOGGLE");
+            System.out.println("ID: " + task.getId() + ": " + task.getCompleted());
+
+            if (task.getCompleted() == false){
+                task.setCompleted(true);
+            } else if (task.getCompleted() == true) {
+                task.setCompleted(false);
+            }
+
+            System.out.println("AFTER TOGGLE");
+            System.out.println("ID: " + task.getId() + ": " + task.getCompleted());
+
+            taskRepository.save(task);
+        }
+
+        taskToToggle = null;
+
+        return "redirect:/tasks";
+    }
+
 }

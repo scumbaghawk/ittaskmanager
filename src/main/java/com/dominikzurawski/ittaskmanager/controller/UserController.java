@@ -3,7 +3,9 @@ package com.dominikzurawski.ittaskmanager.controller;
 import com.dominikzurawski.ittaskmanager.model.Task;
 import com.dominikzurawski.ittaskmanager.model.User;
 import com.dominikzurawski.ittaskmanager.repository.UserRepository;
+import com.dominikzurawski.ittaskmanager.service.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -79,5 +81,39 @@ public class UserController {
         userToDelete = null;
 
         return "redirect:/users";
+    }
+
+    @GetMapping("/myprofile")
+    public String getMyProfile(Model model){
+
+        // lines below are to identify currently logged user
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        String username;
+
+        if (principal instanceof CustomUserDetails) {
+            username = ((CustomUserDetails)principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+        // lines above are to identify currently logged user
+
+        User myUser = userRepository.findByUsername(username);
+        List<Task> myTasks = userRepository.findByUsername(username).getTasks();
+
+        int numberOfTasks = myTasks.size();
+        int numberOfCompletedTasks = 0;
+
+        for (Task task : myTasks){
+            if (task.getCompleted() == true) numberOfCompletedTasks++;
+        }
+
+        int numberOfIncompletedTasks = numberOfTasks - numberOfCompletedTasks;
+
+        model.addAttribute("username", username);
+        model.addAttribute("completedTasks", numberOfCompletedTasks);
+        model.addAttribute("incompletedTasks", numberOfIncompletedTasks);
+
+        return "myprofile";
     }
 }

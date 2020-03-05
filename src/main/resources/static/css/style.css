@@ -32,7 +32,19 @@ a .logo {
 
 .card {
     /*border: none;*/
-    height: 205px;
+    height: 225px;
+    align-items: center;
+}
+
+.card-header {
+    width: 100%;
+    text-align: center;
+}
+
+.card-title {
+    text-align: center;
+    color: #3498DB;
+    font-size: 50px;
 }
 
 .card-text {
@@ -64,4 +76,10 @@ form {
 
 .table {
     margin-top: 50px;
+}
+
+.about {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }

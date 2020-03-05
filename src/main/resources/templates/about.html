@@ -54,6 +54,9 @@
                     <a class="nav-link" href="/users" sec:authorize="hasAnyAuthority('ADMIN', 'MANAGER')">All users</a>
                 </li>
                 <li class="nav-item active">
+                    <a class="nav-link" href="/myprofile" sec:authorize="isAuthenticated()">My profile</a>
+                </li>
+                <li class="nav-item active">
                     <a class="nav-link" href="/about" >About</a>
                 </li>
                 <li class="nav-item active">
@@ -68,9 +71,33 @@
 <!--NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR-->
 <!--NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR-->
 
-<div class="container">
-    <h1>TEMPORARY ABOUT PAGE</h1>
+<div class="jumbotron about">
+    <div class="container">
+        <h1 class="display-3">About us</h1>
+<!--        <p class="lead">Lorem ipsum</p>-->
+        <blockquote class="blockquote">
+            <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+            <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+        </blockquote>
+        <div class="progress">
+            <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+    </div>
 </div>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md">
+            Sed ut tellus sit amet quam gravida sodales. Suspendisse mollis, mi eu porta mattis, tortor lacus pharetra nisl, eget rutrum nisl justo vel leo. Donec vitae vestibulum mi. Quisque sit amet magna fermentum, tincidunt ligula ut, lacinia orci. Vestibulum accumsan, enim vel viverra accumsan, neque nunc dictum erat, at accumsan ipsum quam non mi. Morbi vehicula tellus augue, vel ultricies orci sodales eget. Aliquam pretium turpis in consectetur lobortis. Nullam dictum nunc ut tristique laoreet. Integer nisi felis, ultricies ut nunc ut, ultricies viverra libero. Praesent et molestie tortor. Sed feugiat id eros sed posuere. Mauris imperdiet quis neque quis fringilla. Sed non faucibus leo. Duis vel mi in quam consequat iaculis. Aenean ultrices ligula a tincidunt consectetur. Proin eget eleifend orci. Sed ut tellus sit amet quam gravida sodales. Suspendisse mollis, mi eu porta mattis, tortor lacus pharetra nisl, eget rutrum nisl justo vel leo. Donec vitae vestibulum mi. Quisque sit amet magna fermentum, tincidunt ligula ut, lacinia orci. Vestibulum accumsan, enim vel viverra accumsan, neque nunc dictum erat, at accumsan ipsum quam non mi. Morbi vehicula tellus augue, vel ultricies orci sodales eget. Aliquam pretium turpis in consectetur lobortis. Nullam dictum nunc ut tristique laoreet. Integer nisi felis, ultricies ut nunc ut, ultricies viverra libero. Praesent et molestie tortor. Sed feugiat id eros sed posuere. Mauris imperdiet quis neque quis fringilla. Sed non faucibus leo. Duis vel mi in quam consequat iaculis. Aenean ultrices ligula a tincidunt consectetur. Proin eget eleifend orci.
+        </div>
+        <div class="col-md">
+            Aenean et aliquam turpis, nec hendrerit tortor. Aliquam erat volutpat. Etiam sollicitudin neque at viverra vulputate. Suspendisse feugiat magna vel urna viverra, at vulputate leo aliquam. Vestibulum sit amet tellus pulvinar, suscipit justo ac, blandit ligula. Integer molestie massa eu nunc auctor egestas. Proin rhoncus felis ac vestibulum suscipit. Ut elementum vehicula enim suscipit molestie. Cras cursus rutrum congue. Nulla sagittis libero non urna tincidunt porta ac in diam. Mauris ac turpis sapien. Donec placerat hendrerit lacus, a luctus metus dictum at. In vitae ullamcorper magna, eu volutpat tortor. Nunc urna arcu, iaculis a ultricies quis, condimentum eu eros. Sed nulla arcu, faucibus eu interdum malesuada, pulvinar non justo. Sed id quam gravida ex rhoncus varius id a turpis. Sed ut tellus sit amet quam gravida sodales. Suspendisse mollis, mi eu porta mattis, tortor lacus pharetra nisl, eget rutrum nisl justo vel leo. Donec vitae vestibulum mi. Quisque sit amet magna fermentum, tincidunt ligula ut, lacinia orci. Vestibulum accumsan, enim vel viverra accumsan, neque nunc dictum erat, at accumsan ipsum quam non mi. Morbi vehicula tellus augue, vel ultricies orci sodales eget. Aliquam pretium turpis in consectetur lobortis. Nullam dictum nunc ut tristique laoreet. Integer nisi felis, ultricies ut nunc ut, ultricies viverra libero. Praesent et molestie tortor. Sed feugiat id eros sed posuere. Mauris imperdiet quis neque quis fringilla. Sed non faucibus leo. Duis vel mi in quam consequat iaculis. Aenean ultrices ligula a tincidunt consectetur. Proin eget eleifend orci.
+        </div>
+    </div>
+
+</div>
+
 
 
 <!--BEGGINING OF FOOTER-->

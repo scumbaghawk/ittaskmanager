@@ -54,6 +54,9 @@
                     <a class="nav-link" href="/users" sec:authorize="hasAnyAuthority('ADMIN', 'MANAGER')">All users</a>
                 </li>
                 <li class="nav-item active">
+                    <a class="nav-link" href="/myprofile" sec:authorize="isAuthenticated()">My profile</a>
+                </li>
+                <li class="nav-item active">
                     <a class="nav-link" href="/about" >About</a>
                 </li>
                 <li class="nav-item active">
@@ -87,7 +90,14 @@
             <td th:text="${mytask.getName()}"></td>
             <td th:text="${mytask.getShortDesc()}"></td>
             <td th:text="${mytask.getDesc()}"></td>
-            <td th:text="${mytask.getCompleted()}"></td>
+            <td>
+                <span th:if="${mytask.getCompleted() == false}">
+                    <a  th:href="@{'/task/toggle/' + ${mytask.getId()}}"><button class="btn btn-warning">Incompleted</button></a>
+                </span>
+                <span th:unless="${mytask.getCompleted() == false}">
+                    <a  th:href="@{'/task/toggle/' + ${mytask.getId()}}"><button class="btn btn-success">Completed</button></a>
+                </span>
+            </td>
         </tr>
         </tbody>
     </table>
