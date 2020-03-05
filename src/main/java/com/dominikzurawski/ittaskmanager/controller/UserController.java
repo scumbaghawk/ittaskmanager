@@ -3,9 +3,10 @@ package com.dominikzurawski.ittaskmanager.controller;
 import com.dominikzurawski.ittaskmanager.model.Task;
 import com.dominikzurawski.ittaskmanager.model.User;
 import com.dominikzurawski.ittaskmanager.repository.UserRepository;
-import com.dominikzurawski.ittaskmanager.service.CustomUserDetails;
+import com.dominikzurawski.ittaskmanager.auth.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,8 +20,14 @@ import java.util.Optional;
 @Controller
 public class UserController {
 
-    @Autowired
     private UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+
+    @Autowired
+    public UserController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @GetMapping("/users")
     public String getUsers(Model model){
@@ -131,16 +138,24 @@ public class UserController {
         return "redirect:/myprofile";
     }
 
-//    @PostMapping("/myprofile/changepassword/{id}")
-//    public String setChangePassword(@ModelAttribute(value = "user") User user, Model model, @PathVariable Long id){
-//
-//        Optional<User> userToChangePassword = userRepository.findById(id);
-//
-//        String newPa
-//        if (userToChangePassword.isPresent()){
-//            userRepository.save(user);
-//        }
-//
-//        return "redirect:/myprofile";
-//    }
+    @PostMapping("/myprofile/changepassword/{id}")
+    public String setChangePassword(@ModelAttribute(value = "user") User user, Model model, @PathVariable Long id){
+
+        Optional<User> userToChangePassword = userRepository.findById(id);
+
+        if (user.getPassword() == "") {
+            model.addAttribute("passwordEmpty", "Password can't be empty.");
+            return "redirect:/myprofile/changepassword/" + id;
+        }
+
+        if (userToChangePassword.isPresent()){
+            List<Task> tasks = userToChangePassword.get().getTasks();
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            user.setTasks(tasks);
+            System.out.println(user.getTasks());
+            userRepository.save(user);
+        }
+
+        return "redirect:/myprofile";
+    }
 }

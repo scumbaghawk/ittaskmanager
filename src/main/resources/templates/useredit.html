@@ -106,9 +106,10 @@
             </select>
         </div>
 
-
         <button type="submit" class="btn btn-primary">Edit user</button>
     </form>
+    <a th:href="@{'/user/delete/' + ${user.get().getId()}}"><button class="btn btn-danger">Delete</button></a>
+
 </div>
 
 <!--  -->

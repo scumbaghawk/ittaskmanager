@@ -81,7 +81,6 @@
             <th scope="col">Role</th>
             <th scope="col">Experience</th>
             <th scope="col">Edit</th>
-            <th scope="col">Delete</th>
         </tr>
         </thead>
         <tbody>
@@ -91,7 +90,6 @@
             <td th:text="${user.getRole()}"></td>
             <td th:text="${user.getExperience()}"></td>
             <td> <a th:href="@{'/user/edit/' + ${user.getId()}}"><button class="btn btn-success">Edit</button></a> </td>
-            <td> <a th:href="@{'/user/delete/' + ${user.getId()}}"><button class="btn btn-danger">Delete</button></a> </td>
         </tr>
         </tbody>
     </table>

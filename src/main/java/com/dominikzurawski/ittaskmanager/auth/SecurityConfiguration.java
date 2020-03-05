@@ -1,6 +1,5 @@
 package com.dominikzurawski.ittaskmanager.auth;
 
-import com.dominikzurawski.ittaskmanager.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;

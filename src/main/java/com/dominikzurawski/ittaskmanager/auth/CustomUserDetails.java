@@ -1,4 +1,4 @@
-package com.dominikzurawski.ittaskmanager.service;
+package com.dominikzurawski.ittaskmanager.auth;
 
 import com.dominikzurawski.ittaskmanager.model.User;
 import org.springframework.security.core.GrantedAuthority;

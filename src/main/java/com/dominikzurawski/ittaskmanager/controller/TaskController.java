@@ -3,7 +3,7 @@ package com.dominikzurawski.ittaskmanager.controller;
 import com.dominikzurawski.ittaskmanager.model.Task;
 import com.dominikzurawski.ittaskmanager.repository.TaskRepository;
 import com.dominikzurawski.ittaskmanager.repository.UserRepository;
-import com.dominikzurawski.ittaskmanager.service.CustomUserDetails;
+import com.dominikzurawski.ittaskmanager.auth.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;

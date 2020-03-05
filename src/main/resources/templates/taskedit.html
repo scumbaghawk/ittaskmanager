@@ -97,7 +97,10 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Edit task</button>
+
     </form>
+    <a th:href="@{'/task/delete/' + ${task.get().getId()}}"><button class="btn btn-danger">Delete</button></a>
+
 </div>
 
 <!--  -->
