@@ -3,63 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!--    <link href="https://bootswatch.com/4/darkly/bootstrap.css" rel="stylesheet"-->
+    <!--          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">-->
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
-    <title>Edit task</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+    <script src="https://kit.fontawesome.com/05411fc6f0.js" crossorigin="anonymous"></script>
+    <title>IT Task Manager</title>
 </head>
-
 <body>
 
 <!--NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR-->
 <!--NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR-->
 <!--NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR-->
 
-<div class="container">
 
-    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+
+    <div class="container">
 
         <a class="navbar-brand">
-            <img width="40em" height="40rem" src="https://simpleicon.com/wp-content/uploads/embed-close.png" alt="">
+            <i class="fas fa-code"></i>
         </a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar1">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse justify-content-end" id="navbar1">
+        <div class="collapse navbar-collapse justify-content-end" id="navbarColor02">
             <ul class="navbar-nav justify-content-end">
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="/">Home</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="/login" sec:authorize="isAnonymous()">Login</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="/register" sec:authorize="isAnonymous()">Register</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="/tasks" sec:authorize="hasAnyAuthority('ADMIN', 'MANAGER')">All tasks</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="/mytasks" sec:authorize="isAuthenticated()">My tasks</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="/newtask" sec:authorize="hasAnyAuthority('ADMIN', 'MANAGER')">New task</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="/users" sec:authorize="hasAnyAuthority('ADMIN', 'MANAGER')">All users</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="/about" >About</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="/logout" sec:authorize="isAuthenticated()">Logout</a>
                 </li>
             </ul>
         </div>
-    </nav>
-</div>
+    </div>
+</nav>
 
 <!--NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR-->
 <!--NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR-->

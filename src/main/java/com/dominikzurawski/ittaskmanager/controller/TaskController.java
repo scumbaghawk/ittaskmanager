@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,7 +26,6 @@ import java.util.Optional;
 public class TaskController {
 
     final TaskRepository taskRepository;
-
     final UserRepository userRepository;
 
     @Autowired
@@ -94,7 +92,7 @@ public class TaskController {
         task.setCompleted(false);
         taskRepository.save(task);
 
-        return "redirect:/";
+        return "redirect:/tasks";
     }
 
     @GetMapping("/task/edit/{id}")
@@ -111,7 +109,7 @@ public class TaskController {
     }
 
     @PostMapping("/task/edit/{id}")
-    public String saveTaskEdit(@ModelAttribute(value = "taskToEdit") Task task, Model model, @PathVariable Long id){
+    public String saveTaskEdit(@ModelAttribute(value = "task") Task task, Model model, @PathVariable Long id){
 
         Optional<Task> taskToEdit = taskRepository.findById(id);
 
@@ -130,7 +128,7 @@ public class TaskController {
 
         taskRepository.save(task);
 
-        return "tasks";
+        return "redirect:/tasks";
     }
 
 

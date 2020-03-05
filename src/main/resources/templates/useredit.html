@@ -67,31 +67,44 @@
 <!--NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR-->
 <!--NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR-->
 
+
 <div class="container login-register-form">
 
-    <div th:if="${nameEmpty}" th:text="${nameEmpty}" class="alert alert-danger register-validation"></div>
-    <div th:if="${shortDescEmpty}" th:text="${shortDescEmpty}" class="alert alert-danger register-validation"></div>
-    <div th:if="${descEmpty}" th:text="${descEmpty}" class="alert alert-danger register-validation"></div>
+    <div th:if="${usernameEmpty}" th:text="${usernameEmpty}" class="alert alert-danger register-validation"></div>
+    <div th:if="${roleIsNull}" th:text="${roleIsNull}" class="alert alert-danger register-validation"></div>
+    <div th:if="${experienceIsNull}" th:text="${experienceIsNull}" class="alert alert-danger register-validation"></div>
 
-    <form th:action="@{/newtask}" th:object="${task}" method="post">
+    <form th:action="@{/user/edit/{id}(id = ${user.get().getId()})}" th:object="${user}" method="post">
 
 
         <div class="form-group">
-            <label for="name">Task name</label>
-            <input type="text" th:name="name" th:value="*{name}" class="form-control" id="name" placeholder="Task name">
+            <label for="username">Username</label>
+            <input type="username" th:name="username" th:value="*{get().getUsername()}" class="form-control" id="username">
+        </div>
+
+        <input type="hidden" th:value="*{get().getPassword()}" name="password" />
+
+        <div class="form-group">
+            <label for="role">Are you manager or employee?</label>
+            <select class="form-control" id="role" th:name="role">
+                <option></option>
+                <option value="MANAGER">Manager</option>
+                <option value="EMPLOYEE">Employee</option>
+            </select>
         </div>
 
         <div class="form-group">
-            <label for="shortdesc">Short description</label>
-            <input type="textarea" th:name="shortDesc" th:value="*{shortDesc}" class="form-control" id="shortdesc">
+            <label for="experience">What is your experience?</label>
+            <select class="form-control" id="experience" th:name="experience">
+                <option></option>
+                <option value="JUNIOR">Junior</option>
+                <option value="MID">Mid</option>
+                <option value="SENIOR">Senior</option>
+            </select>
         </div>
 
-        <div class="form-group">
-            <label for="desc">Description</label>
-            <input type="textarea" th:name="desc" th:value="*{desc}" class="form-control" id="desc">
-        </div>
 
-        <button type="submit" class="btn btn-primary">Add new task</button>
+        <button type="submit" class="btn btn-primary">Edit user</button>
     </form>
 </div>
 
