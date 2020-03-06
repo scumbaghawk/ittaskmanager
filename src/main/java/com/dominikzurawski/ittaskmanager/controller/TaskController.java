@@ -1,6 +1,7 @@
 package com.dominikzurawski.ittaskmanager.controller;
 
 import com.dominikzurawski.ittaskmanager.model.Task;
+import com.dominikzurawski.ittaskmanager.model.User;
 import com.dominikzurawski.ittaskmanager.repository.TaskRepository;
 import com.dominikzurawski.ittaskmanager.repository.UserRepository;
 import com.dominikzurawski.ittaskmanager.auth.CustomUserDetails;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * This class is responsible for:
@@ -95,6 +98,20 @@ public class TaskController {
         return "redirect:/tasks";
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     @GetMapping("/task/edit/{id}")
     public String getTaskEdit(Model model, @PathVariable Long id){
 
@@ -107,6 +124,9 @@ public class TaskController {
 
         return "redirect:/";
     }
+
+
+
 
     @PostMapping("/task/edit/{id}")
     public String saveTaskEdit(@ModelAttribute(value = "task") Task task, Model model, @PathVariable Long id){
@@ -130,7 +150,6 @@ public class TaskController {
 
         return "redirect:/tasks";
     }
-
 
     @GetMapping("/task/delete/{id}")
     public String deleteTask(@PathVariable Long id) {
@@ -156,8 +175,8 @@ public class TaskController {
 
             Task task = taskToToggle.get();
 
-            System.out.println("BEFORE TOGGLE");
-            System.out.println("ID: " + task.getId() + ": " + task.getCompleted());
+//            System.out.println("BEFORE TOGGLE");
+//            System.out.println("ID: " + task.getId() + ": " + task.getCompleted());
 
             if (task.getCompleted() == false){
                 task.setCompleted(true);
@@ -165,13 +184,56 @@ public class TaskController {
                 task.setCompleted(false);
             }
 
-            System.out.println("AFTER TOGGLE");
-            System.out.println("ID: " + task.getId() + ": " + task.getCompleted());
+//            System.out.println("AFTER TOGGLE");
+//            System.out.println("ID: " + task.getId() + ": " + task.getCompleted());
 
             taskRepository.save(task);
         }
 
         taskToToggle = null;
+
+        return "redirect:/tasks";
+    }
+
+    @GetMapping("/task/assign/{id}")
+    String getTaskAssign(@PathVariable Long id, @ModelAttribute(value = "user") User user, Model model){
+
+        Optional<Task> taskToAssign = taskRepository.findById(id);
+        Long taskId = taskToAssign.get().getId();
+        String taskName = taskToAssign.get().getName();
+        List<User> users = userRepository.findAll();
+
+        if (taskToAssign.isPresent()){
+            model.addAttribute("taskid", taskId);
+            model.addAttribute("taskname", taskName);
+            model.addAttribute("users", users);
+            return "assigntask";
+        }
+
+        return "assigntask";
+    }
+
+    @PostMapping("/task/assign/{id}")
+    String saveTaskAssign(@PathVariable Long id, @ModelAttribute(value = "user") User user){
+
+        Optional<User> userToAddTask = userRepository.findById(user.getId());
+        Optional<Task> taskToAssign = taskRepository.findById(id);
+
+        if (user.getId() == -1){
+//            System.out.println("Task name: *" + taskToAssign.get().getName() + "has no owner now.");
+            System.out.println("You can't assign task to not existing user.");
+            return "tasks";
+        }
+
+        if (userToAddTask.isPresent() && taskToAssign.isPresent()){
+
+            User foundUser = userToAddTask.get();
+            Task foundTask = taskToAssign.get();
+            foundUser.addTask(foundTask);
+            userRepository.save(foundUser);
+
+            System.out.println("Task name: *" + foundTask.getName() + "* was assigned to " + foundUser.getUsername());
+        }
 
         return "redirect:/tasks";
     }

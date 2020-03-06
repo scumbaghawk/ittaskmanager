@@ -31,6 +31,14 @@ public class User {
     @JoinColumn(name = "user_id")
     private List<Task> tasks;
 
+    public void addTask(Task task){
+        this.tasks.add(task);
+    }
+
+    public void removeTask(Long id){
+        tasks.remove(id);
+    }
+
 //    getters and setters...
 
     public long getId() {
