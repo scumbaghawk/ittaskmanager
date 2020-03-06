@@ -89,7 +89,18 @@
             <td th:text="${user.getUsername()}"></td>
             <td th:text="${user.getRole()}"></td>
             <td th:text="${user.getExperience()}"></td>
-            <td> <a th:href="@{'/user/edit/' + ${user.getId()}}"><button class="btn btn-success">Edit</button></a> </td>
+            <td>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Edit
+                    </button>
+                    <div class="dropdown-menu">
+                        <a th:href="@{'/user/edit/' + ${user.getId()}}" class="dropdown-item">Edit</a>
+                        <div class="dropdown-divider"></div>
+                        <a th:href="@{'/user/delete/' + ${user.getId()}}" class="dropdown-item">Delete</a>
+                    </div>
+                </div>
+            </td>
         </tr>
         </tbody>
     </table>

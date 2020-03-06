@@ -81,7 +81,7 @@
             <th scope="col">Short description</th>
             <th scope="col">Description</th>
             <th scope="col">Completed</th>
-            <th scope="col">Edit</th>
+            <th scope="col">Action</th>
         </tr>
         </thead>
         <tbody>
@@ -98,8 +98,21 @@
                     <a th:href="@{'/task/toggle/' + ${task.getId()}}"><button class="btn btn-success">Completed</button></a>
                 </span>
             </td>
-            <td> <a th:href="@{'/task/edit/' + ${task.getId()}}"><button class="btn btn-success">Edit</button></a> </td>
+            <td>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Edit
+                    </button>
+                    <div class="dropdown-menu">
+                        <a th:href="@{'/task/edit/' + ${task.getId()}}" class="dropdown-item">Edit</a>
+                        <a th:href="@{'/task/assign/' + ${task.getId()}}" class="dropdown-item">Assign</a>
+                        <div class="dropdown-divider"></div>
+                        <a th:href="@{'/task/delete/' + ${task.getId()}}" class="dropdown-item">Delete</a>
+                    </div>
+                </div>
+            </td>
         </tr>
+
         </tbody>
     </table>
 </div>
