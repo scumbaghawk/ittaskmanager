@@ -1,6 +1,6 @@
 package com.dominikzurawski.ittaskmanager.controller;
 
-import com.dominikzurawski.ittaskmanager.auth.PasswordConfirmation;
+import com.dominikzurawski.ittaskmanager.service.PasswordConfirmation;
 import com.dominikzurawski.ittaskmanager.model.Task;
 import com.dominikzurawski.ittaskmanager.model.User;
 import com.dominikzurawski.ittaskmanager.repository.UserRepository;

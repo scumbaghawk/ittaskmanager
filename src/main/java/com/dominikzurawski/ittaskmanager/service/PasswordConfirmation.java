@@ -1,7 +1,8 @@
-package com.dominikzurawski.ittaskmanager.auth;
+package com.dominikzurawski.ittaskmanager.service;
 
-import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PasswordConfirmation {
 
     String passwordToConfirm;

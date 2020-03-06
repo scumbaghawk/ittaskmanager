@@ -5,16 +5,20 @@ import com.dominikzurawski.ittaskmanager.model.User;
 import com.dominikzurawski.ittaskmanager.repository.TaskRepository;
 import com.dominikzurawski.ittaskmanager.repository.UserRepository;
 import com.dominikzurawski.ittaskmanager.auth.CustomUserDetails;
+import com.dominikzurawski.ittaskmanager.service.SortService;
+import com.dominikzurawski.ittaskmanager.service.TaskComparatorByCompletedService;
+import com.dominikzurawski.ittaskmanager.service.TaskComparatorByNameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
 
 /**
  * This class is responsible for:
@@ -40,9 +44,38 @@ public class TaskController {
     @GetMapping("/tasks")
     public String getAllTasks(Model model){
 
-        //pobiera OBIEKTY TASK i potem w thymeleafie mozna je wyciagac poszeczegolnym metodami z TaskDto
+        SortService sortService = new SortService();
         List<Task> tasks = taskRepository.findAll();
+        model.addAttribute("sortService", sortService);
         model.addAttribute("tasks", tasks);
+
+        return "tasks";
+    }
+
+    @PostMapping("/tasks")
+    public String getSortedTasks(Model model, @ModelAttribute SortService sortService){
+
+        System.out.println(sortService.getSortBy());;
+
+        if (sortService.getSortBy().equals("")){
+            System.out.println("SORTED BY DEFAULT");
+            List<Task> tasks = taskRepository.findAll();
+            model.addAttribute("tasks", tasks);
+        } else if (sortService.getSortBy().equals("id")){
+            System.out.println("SORTED BY ID");
+            List<Task> tasks = taskRepository.findAll();
+            model.addAttribute("tasks", tasks);
+        } else if (sortService.getSortBy().equals("name")){
+           // sort by name
+            System.out.println("SORTED BY NAME");
+            List<Task> tasks = taskRepository.findAll();
+            Collections.sort(tasks, new TaskComparatorByNameService());
+            model.addAttribute("tasks", tasks);
+        } else if (sortService.getSortBy().equals("completed")){
+            List<Task> tasks = taskRepository.findAll();
+            Collections.sort(tasks, new TaskComparatorByCompletedService());
+            model.addAttribute("tasks", tasks);
+        }
 
         return "tasks";
     }
