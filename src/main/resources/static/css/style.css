@@ -20,9 +20,7 @@ a .logo {
 }
 
 .page-footer {
-    /*display: none;*/
     background-color: #303030;
-    /*position: absolute;*/
     margin-top: 50px;
     left: 0;
     bottom: 0;

@@ -80,7 +80,8 @@
         <div th:if="${passwordEmpty}" th:text="${passwordEmpty}" class="alert alert-danger register-validation"></div>
         <div th:if="${roleIsNull}" th:text="${roleIsNull}" class="alert alert-danger register-validation"></div>
         <div th:if="${experienceIsNull}" th:text="${experienceIsNull}" class="alert alert-danger register-validation"></div>
-        <div th:if="${passwordMatch}" th:text="${passwordMatch}" class="alert alert-danger register-validation"></div>
+        <div th:if="${passwordmissmatch}" th:text="${passwordmissmatch}" class="alert alert-danger register-validation"></div>
+        <div th:if="${passwordconfirmationfailed}" th:text="${passwordconfirmationfailed}" class="alert alert-danger register-validation"></div>
 
         <div class="form-group">
             <label for="username">Username</label>
@@ -92,10 +93,10 @@
             <input type="password" th:name="password" class="form-control" id="password">
         </div>
 
-<!--        <div class="form-group">-->
-<!--            <label for="confirmPassword">Confirm password</label>-->
-<!--            <input type="password" th:name="confirmPassword" class="form-control" id="confirmPassword">-->
-<!--        </div>-->
+        <div class="form-group">
+            <label for="passwordToConfirm">Confirm password</label>
+            <input type="password" class="form-control" id="passwordToConfirm" th:name="passwordToConfirm">
+        </div>
 
         <div class="form-group">
             <label for="role">Are you manager or employee?</label>

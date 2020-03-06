@@ -1,5 +1,6 @@
 package com.dominikzurawski.ittaskmanager.controller;
 
+import com.dominikzurawski.ittaskmanager.auth.PasswordConfirmation;
 import com.dominikzurawski.ittaskmanager.model.Task;
 import com.dominikzurawski.ittaskmanager.model.User;
 import com.dominikzurawski.ittaskmanager.repository.UserRepository;
@@ -141,8 +142,11 @@ public class UserController {
 
         Optional<User> userToEdit = userRepository.findById(id);
 
+        PasswordConfirmation passwordConfirmation = new PasswordConfirmation();
+
         if (userToEdit.isPresent()){
             model.addAttribute("user", userToEdit);
+            model.addAttribute("passwordConfirmation", passwordConfirmation);
             return "changepassword";
         }
 
@@ -150,12 +154,18 @@ public class UserController {
     }
 
     @PostMapping("/myprofile/changepassword/{id}")
-    public String setChangePassword(@ModelAttribute(value = "user") User user, Model model, @PathVariable Long id){
+    public String setChangePassword(@ModelAttribute(value = "user") User user, PasswordConfirmation passwordConfirmation, Model model, @PathVariable Long id){
 
         Optional<User> userToChangePassword = userRepository.findById(id);
 
+        System.out.println("New password: " + user.getPassword());
+        System.out.println("Password confirmation: " + passwordConfirmation.getPasswordToConfirm());
+
         if (user.getPassword() == "") {
             model.addAttribute("passwordEmpty", "Password can't be empty.");
+            return "redirect:/myprofile/changepassword/" + id;
+        } else if (!passwordConfirmation.getPasswordToConfirm().equals(user.getPassword())){
+            model.addAttribute("passwordmissmatch", "Passwords don't match");
             return "redirect:/myprofile/changepassword/" + id;
         }
 
@@ -163,7 +173,6 @@ public class UserController {
             List<Task> tasks = userToChangePassword.get().getTasks();
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             user.setTasks(tasks);
-            System.out.println(user.getTasks());
             userRepository.save(user);
         }
 

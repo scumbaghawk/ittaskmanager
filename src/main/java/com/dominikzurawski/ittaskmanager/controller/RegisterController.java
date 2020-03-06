@@ -1,5 +1,6 @@
 package com.dominikzurawski.ittaskmanager.controller;
 
+import com.dominikzurawski.ittaskmanager.auth.PasswordConfirmation;
 import com.dominikzurawski.ittaskmanager.model.User;
 import com.dominikzurawski.ittaskmanager.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,26 +38,36 @@ public class RegisterController {
     public String getRegister(Model model){
 
         User user = new User();
+        PasswordConfirmation passwordConfirmation = new PasswordConfirmation();
         model.addAttribute("user", user);
+        model.addAttribute("passwordToConfirm", passwordConfirmation);
 
         return "register";
     }
 
     @PostMapping("/register")
-    public String postRegister(@ModelAttribute(value = "user") User user, BindingResult result, Model model){
+    public String postRegister(@ModelAttribute(value = "user") User user, PasswordConfirmation passwordConfirmation, BindingResult result, Model model){
 
         // check if user already exists
         User userExisting = userRepository.findByUsername(user.getUsername());
 
-        // basic form validation
-        if (user.getUsername() == ""){
+        // form validation
+        if (user.getUsername().equals("")){
             model.addAttribute("usernameEmpty", "Username can't be empty.");
             return "register";
         } else if (userExisting != null){
             model.addAttribute("usernameTaken", "Username is already taken.");
             return "register";
-        } else if (user.getPassword() == ""){
+        } else if (user.getPassword().equals("")) {
             model.addAttribute("passwordEmpty", "Password can't be empty.");
+            return "register";
+        } else if (passwordConfirmation.getPasswordToConfirm().equals("")) {
+            model.addAttribute("passwordconfirmationfailed", "Password confirmation can't be empty.");
+            return "register";
+        } else if (!passwordConfirmation.getPasswordToConfirm().equals(user.getPassword())) {
+            System.out.println("password: " + user.getPassword());
+            System.out.println("password confirmation: " + passwordConfirmation.getPasswordToConfirm());
+            model.addAttribute("passwordmissmatch", "Passwords don't match");
             return "register";
         } else if (user.getRole() == null){
             model.addAttribute("roleIsNull", "Please choose your role");
