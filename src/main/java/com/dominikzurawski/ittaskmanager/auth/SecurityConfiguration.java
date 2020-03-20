@@ -24,6 +24,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().disable();
         // both lines above are just for getting h2-console to work
 
+        // accesing rules and log-in page rules
         http
             .authorizeRequests()
                 .antMatchers("/tasks").hasAnyAuthority("ADMIN", "MANAGER")
@@ -56,7 +57,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth.authenticationProvider(authProvider());
     }
 
-    // provides bcryption encryption
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
