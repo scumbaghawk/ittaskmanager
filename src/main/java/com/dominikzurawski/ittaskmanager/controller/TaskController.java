@@ -18,17 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-
-
-/**
- * This class is responsible for:
- * displaying all tasks
- * displaying tasks for particular users (who have tasks assigned to them)
- * creating new tasks
- * updating existing tasks
- * deleting tasks
- **/
 
 @Controller
 public class TaskController {
@@ -45,6 +34,7 @@ public class TaskController {
     @GetMapping("/tasks")
     public String getAllTasks(Model model){
 
+        // initialize sort object and add to the model
         SortService sortService = new SortService();
         List<Task> tasks = taskRepository.findAll();
         model.addAttribute("sortService", sortService);
@@ -56,19 +46,14 @@ public class TaskController {
     @PostMapping("/tasks")
     public String getSortedTasks(Model model, @ModelAttribute SortService sortService){
 
-        System.out.println(sortService.getSortBy());;
-
+        // get sorting option from thymeleaf and sort tasks
         if (sortService.getSortBy().equals("")){
-            System.out.println("SORTED BY DEFAULT");
             List<Task> tasks = taskRepository.findAll();
             model.addAttribute("tasks", tasks);
         } else if (sortService.getSortBy().equals("id")){
-            System.out.println("SORTED BY ID");
             List<Task> tasks = taskRepository.findAll();
             model.addAttribute("tasks", tasks);
         } else if (sortService.getSortBy().equals("name")){
-           // sort by name
-            System.out.println("SORTED BY NAME");
             List<Task> tasks = taskRepository.findAll();
             Collections.sort(tasks, new TaskComparatorByNameService());
             model.addAttribute("tasks", tasks);
@@ -86,16 +71,13 @@ public class TaskController {
 
         // lines below are to identify currently logged user
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
         String username;
-
         if (principal instanceof CustomUserDetails) {
             username = ((CustomUserDetails)principal).getUsername();
         } else {
             username = principal.toString();
         }
         // lines above are to identify currently logged user
-
 
         List<Task> myTasks = userRepository.findByUsername(username).getTasks();
         model.addAttribute("myTasks", myTasks);
@@ -115,6 +97,7 @@ public class TaskController {
     @PostMapping("/newtask")
     public String saveNewTask(@ModelAttribute(value = "task") Task task, Model model){
 
+        // validate new task form
         if (task.getName().equals("")){
             model.addAttribute("nameEmpty", "Name can't be empty");
             return "newtask";
@@ -126,6 +109,7 @@ public class TaskController {
             return "newtask";
         }
 
+        // automatically set every new task incompleted
         task.setCompleted(false);
         taskRepository.save(task);
 
@@ -148,6 +132,7 @@ public class TaskController {
     @PostMapping("/task/edit/{id}")
     public String saveTaskEdit(@ModelAttribute(value = "task") Task task, Model model, @PathVariable Long id){
 
+        // optional - task may not be found
         Optional<Task> taskToEdit = taskRepository.findById(id);
 
         if (taskToEdit.isPresent()) model.addAttribute("task", taskToEdit);
@@ -171,8 +156,10 @@ public class TaskController {
     @GetMapping("/task/delete/{id}")
     public String deleteTask(@PathVariable Long id) {
 
+        // optional - task may not be found
         Optional<Task> taskToDelete = taskRepository.findById(id);
 
+        // if it is found then delete
         if (taskToDelete.isPresent()){
             Task task = taskToDelete.get();
             taskRepository.delete(task);
@@ -188,6 +175,7 @@ public class TaskController {
 
         Optional<Task> taskToToggle = taskRepository.findById(id);
 
+        // if task is found then toggle it
         if (taskToToggle.isPresent()){
 
             Task task = taskToToggle.get();
@@ -230,8 +218,6 @@ public class TaskController {
         Optional<Task> taskToAssign = taskRepository.findById(id);
 
         if (user.getId() == -1){
-//            System.out.println("Task name: *" + taskToAssign.get().getName() + "has no owner now.");
-            System.out.println("You can't assign task to not existing user.");
             return "tasks";
         }
 
@@ -241,8 +227,6 @@ public class TaskController {
             Task foundTask = taskToAssign.get();
             foundUser.addTask(foundTask);
             userRepository.save(foundUser);
-
-            System.out.println("Task name: *" + foundTask.getName() + "* was assigned to " + foundUser.getUsername());
         }
 
         return "redirect:/tasks";

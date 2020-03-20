@@ -12,12 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-/**
- * This class is responsible for:
- * Registering new users including encryption
- * displaying all users
- **/
-
 @Controller
 public class RegisterController {
 
@@ -36,6 +30,7 @@ public class RegisterController {
     public String getRegister(Model model){
 
         User user = new User();
+        // initialize extra object to verify password in form
         PasswordConfirmation passwordConfirmation = new PasswordConfirmation();
         model.addAttribute("user", user);
         model.addAttribute("passwordToConfirm", passwordConfirmation);
@@ -75,17 +70,10 @@ public class RegisterController {
             return "register";
         }
 
-        // testing purposes
-        System.out.println("New user registered:");
-        System.out.println("Username: " + user.getUsername());
-        System.out.println("Password: " + user.getPassword());
-        System.out.println("Role: " + user.getRole());
-        System.out.println("Experience: " + user.getExperience());
-        System.out.println("=======================");
-
         // bcrypt encoding
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
+        // add new user to database
         userRepository.save(user);
 
         return "redirect:/";

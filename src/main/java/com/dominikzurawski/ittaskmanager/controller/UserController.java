@@ -33,7 +33,6 @@ public class UserController {
     @GetMapping("/users")
     public String getUsers(Model model){
 
-        //pobiera OBIEKTY TASK i potem w thymeleafie mozna je wyciagac poszeczegolnym metodami z TaskDto
         List<User> users = userRepository.findAll();
         model.addAttribute("users", users);
 
@@ -60,6 +59,7 @@ public class UserController {
 
         if (userToEdit.isPresent()) model.addAttribute("user", userToEdit);
 
+        // validate editing user
         if (user.getUsername().equals("")){
             model.addAttribute("usernameEmpty", "Username can't be empty");
             return "useredit";
@@ -85,6 +85,7 @@ public class UserController {
 
         String username;
 
+        // if user is found and trying to delete own account then logout
         if (userToDelete.isPresent()){
             User user = userToDelete.get();
             if (principal instanceof CustomUserDetails) {
@@ -96,8 +97,6 @@ public class UserController {
             }
             userRepository.delete(user);
         }
-
-        userToDelete = null;
 
         return "redirect:/";
     }
