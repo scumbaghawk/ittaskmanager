@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -131,20 +132,6 @@ public class TaskController {
         return "redirect:/tasks";
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     @GetMapping("/task/edit/{id}")
     public String getTaskEdit(Model model, @PathVariable Long id){
 
@@ -157,9 +144,6 @@ public class TaskController {
 
         return "redirect:/";
     }
-
-
-
 
     @PostMapping("/task/edit/{id}")
     public String saveTaskEdit(@ModelAttribute(value = "task") Task task, Model model, @PathVariable Long id){
@@ -200,7 +184,7 @@ public class TaskController {
     }
 
     @GetMapping("/task/toggle/{id}")
-    public String toggleTaskCompleted(@PathVariable Long id){
+    public String toggleTaskCompleted(@PathVariable Long id, HttpServletRequest request){
 
         Optional<Task> taskToToggle = taskRepository.findById(id);
 
@@ -208,24 +192,17 @@ public class TaskController {
 
             Task task = taskToToggle.get();
 
-//            System.out.println("BEFORE TOGGLE");
-//            System.out.println("ID: " + task.getId() + ": " + task.getCompleted());
-
             if (task.getCompleted() == false){
                 task.setCompleted(true);
             } else if (task.getCompleted() == true) {
                 task.setCompleted(false);
             }
 
-//            System.out.println("AFTER TOGGLE");
-//            System.out.println("ID: " + task.getId() + ": " + task.getCompleted());
-
             taskRepository.save(task);
         }
 
-        taskToToggle = null;
-
-        return "redirect:/tasks";
+        String referer = request.getHeader("Referer");
+        return "redirect:" + referer;
     }
 
     @GetMapping("/task/assign/{id}")
